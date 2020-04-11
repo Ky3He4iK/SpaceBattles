@@ -1,0 +1,8 @@
+Background_v0:
+Original image: https://www.deviantart.com/dreamsverse/art/I-swear-I-ll-Upload-something-different-eventually-522632896
+Modified by me (Ky3He4iK)
+
+badlogic:
+Default image in projects with libGDX
+
+other images are created by me (Ky3He4iK)
