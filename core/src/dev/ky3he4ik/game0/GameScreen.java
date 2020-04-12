@@ -29,7 +29,8 @@ public class GameScreen implements Screen {
         game.batch = new SpriteBatch();
 //		ship = new BaseShip(3, 3, 0, 0, 0);
 //		img = new Texture("badlogic.jpg");
-        ship = new SimpeShip(-background.getWidth() / 2, -background.getHeight() / 2, -(float)Math.PI / 2);
+//        ship = new SimpeShip(-background.getWidth() / 2, -background.getHeight() / 2, -(float)Math.PI / 2);
+        ship = new SimpeShip(0, 0 , -(float)Math.PI / 2);
     }
 
     @Override
@@ -65,8 +66,14 @@ public class GameScreen implements Screen {
         game.batch.begin();
         Gdx.gl.glClearColor(0, 0, 0.2f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-        game.batch.draw(background, ship.getX(), ship.getY());
+        game.batch.draw(background, ship.getX() - camera.viewportWidth, ship.getY() - camera.viewportWidth, ship.getX(), ship.getY(), background.getWidth(), background.getHeight(),
+                scale, scale, 0, 0, 0, background.getWidth(), background.getHeight(),
+                false, false);
+        //draw(Texture texture, float x, float y,
+        //float originX, float originY, float width, float height,
+        //float scaleX, float scaleY, float rotation,
+        //int srcX, int srcY, int srcWidth, int srcHeight,
+        //boolean flipX, boolean flipY)
 
         ship.render(game.batch, scale);
 
@@ -75,8 +82,10 @@ public class GameScreen implements Screen {
                         ")\nAngle: " + ship.getAngle() + " (" + ship.getAngle() / (float) Math.PI * 180 +
                         ")\nSpeed: (" + ship.getSpeedX() + "; " + ship.getSpeedY() + ";   Rot: " + ship.getAngleSpeed() +
                         ")\nScale: " + scale +
-                        "Bg size: " + background.getWidth() + "x" + background.getHeight()
+                        "\nBg size: " + background.getWidth() + "x" + background.getHeight() +
+                        "\n??: " + Gdx.input.getX() + "; " + Gdx.input.getY()
                 , 0, camera.viewportHeight - game.font.getCapHeight());
+
 
         // process user input
         if (Gdx.input.isTouched()) {
