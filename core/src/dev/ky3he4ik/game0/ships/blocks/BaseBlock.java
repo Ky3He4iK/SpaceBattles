@@ -17,8 +17,8 @@ abstract public class BaseBlock {
     public final static int TIMEOUT_TICKS = 0;
     public final static int SIZE_X = 0, SIZE_Y = 0;
     public final static int ENERGY_STORAGE = 0;
-    protected static Texture texture = null;
-    private static String textureName = "cockpit_v0.png";
+    protected Texture texture;
+    protected String textureName;
 
     void specialAction(BaseShip ship) {
     }
@@ -60,17 +60,19 @@ abstract public class BaseBlock {
     private int assignedKeyCode;
     private int durability;
 
-    BaseBlock(int _assignedKeyCode) {
+    BaseBlock(String textureName, int _assignedKeyCode) {
+        this.textureName = textureName;
         durability = MAX_DURABILITY;
         assignedKeyCode = _assignedKeyCode;
     }
 
-    BaseBlock() {
+    BaseBlock(String textureName) {
+        this.textureName = textureName;
         durability = MAX_DURABILITY;
         assignedKeyCode = -1;
     }
 
-    public static Texture getTexture() {
+    public Texture getTexture() {
         if (texture == null)
             texture = new Texture(textureName);
 //            texture = new Texture(Gdx.files.internal("badlogic.jpg"));
@@ -79,7 +81,7 @@ abstract public class BaseBlock {
 
     public BaseBlock toBaseBlock() { return this; }
 
-    public static void dispose() {
+    public void dispose() {
         if (texture != null) {
             texture.dispose();
             texture = null;
